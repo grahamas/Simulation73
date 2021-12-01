@@ -60,7 +60,8 @@ end
 n_populations(::AbstractModel{T,N,P}) where {T,N,P} = P
 
 function initial_value(::AbstractModel{T,N,P}, space::AbstractSpace{T,N}) where {T,N,P}
-    init_val = AxisArray(population_repeat(zeros(space), P), (coordinate_axes(space)..., 1:P))
+    #init_val = AxisArray(population_repeat(zeros(space), P), (coordinate_axes(space)..., 1:P))
+    init_val = population_repeat(zeros(space), P)
     return init_val
 end
     

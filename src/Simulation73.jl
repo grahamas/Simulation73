@@ -6,7 +6,6 @@ import OrdinaryDiffEq: OrdinaryDiffEqAlgorithm, ODEProblem, Euler
 import DiffEqBase: DESolution, solve, ODEProblem, DECallback
 using OrdinaryDiffEq
 using Lazy
-using AxisIndices
 using Parameters
 
 # "variables.jl"
