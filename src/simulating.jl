@@ -75,7 +75,7 @@ struct Simulation{
         ALG,
         DT<:Union{T,Nothing},
         SV_IDX<:Union{AbstractArray,Nothing},
-        CB<:Union{Tuple{Function,NamedTuple},Tuple{DECallback,NamedTuple},Nothing,Vector{Tuple{Function,NamedTuple}}},
+        CB<:Union{Tuple{Function,NamedTuple},Tuple{DECallback,NamedTuple},Nothing,Vector{<:Tuple{<:Function,<:NamedTuple}}},
         GR<:Function} <: AbstractSimulation{T}
     model::M
     space::S
