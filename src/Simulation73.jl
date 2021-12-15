@@ -1,10 +1,9 @@
 module Simulation73
 
 using DrWatson
-using DiffEqBase, OrdinaryDiffEq, DiffEqCallbacks#, DiffEqParamEstim
-import OrdinaryDiffEq: OrdinaryDiffEqAlgorithm, ODEProblem, Euler
+using DiffEqBase, DiffEqCallbacks#, DiffEqParamEstim
+import OrdinaryDiffEq: OrdinaryDiffEqAlgorithm, ODEProblem, Euler, ODECompositeSolution#, RODESolution
 import DiffEqBase: DESolution, solve, ODEProblem, DECallback
-using OrdinaryDiffEq
 using Lazy
 using Parameters
 

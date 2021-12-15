@@ -1,4 +1,4 @@
-const ModelSolution{T,NPT_FULL,NP_SAVED} = Union{OrdinaryDiffEq.ODECompositeSolution{T,NPT_FULL,<:AbstractArray{<:AbstractArray{T,NP_SAVED}}},ODESolution{T,NPT_FULL,<:AbstractArray{<:AbstractArray{T,NP_SAVED}}}}#,OrdinaryDiffEq.RODESolution{T,NPT_FULL,<:AbstractArray{<:AbstractArray{T,NP_SAVED}}}}
+const ModelSolution{T,NPT_FULL,NP_SAVED} = Union{ODECompositeSolution{T,NPT_FULL,<:AbstractArray{<:AbstractArray{T,NP_SAVED}}},ODESolution{T,NPT_FULL,<:AbstractArray{<:AbstractArray{T,NP_SAVED}}}}#,RODESolution{T,NPT_FULL,<:AbstractArray{<:AbstractArray{T,NP_SAVED}}}}
 
 # FIXME not real dispatch, since it's just an alias
 @inline population(A::AbstractArray{T,N}, i) where {T,N} = view_slice_last(A, i)
