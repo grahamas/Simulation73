@@ -1,9 +1,10 @@
 module Simulation73
 
 using DrWatson
-using DiffEqBase, DiffEqCallbacks#, DiffEqParamEstim
-import OrdinaryDiffEq: OrdinaryDiffEqAlgorithm, ODEProblem, Euler, ODECompositeSolution#, RODESolution
-import DiffEqBase: DESolution, solve, ODEProblem, DECallback
+import SciMLBase: AbstractTimeseriesSolution, AbstractODEAlgorithm, ODEProblem, ODESolution # FIXME: does it need ODE?
+import OrdinaryDiffEq: Euler
+import DiffEqBase: DESolution, solve, DECallback
+import DiffEqCallbacks: SavedValues
 using Lazy
 using Parameters
 

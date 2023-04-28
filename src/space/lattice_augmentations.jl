@@ -41,13 +41,13 @@ linear_next(num::Int) = num + 1
 #    end
 #end
 
-
+# FIXME what is this for?
 struct RandomlyEmbeddedLattice{T,N_ARR,N_CDT,L<:AbstractLattice{T,N_ARR},E<:AbstractSpace{T}} <: AbstractEmbeddedLattice{T,N_ARR,N_CDT,L}
     lattice::L
     embedded_lattice::E
     coordinates::Array{NTuple{N_CDT,T},N_ARR}
 end
-function RandomlyEmbeddedLattice(; lattice::L, embedded_lattice::E) where {T,N_ARR,L<:AbstractLattice{T,N_ARR},E<:AbstractSpace{T}}
+function RandomlyEmbeddedLattice(; lattice, embedded_lattice)
     embedded_coordinates = embed_randomly(lattice, embedded_lattice)
     RandomlyEmbeddedLattice(lattice, embedded_lattice, embedded_coordinates)
 end

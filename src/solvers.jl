@@ -1,5 +1,5 @@
 "A Solver holds the parameters of the differential equation solver."
-struct Solver{T,ALG<:Union{OrdinaryDiffEqAlgorithm,Nothing},DT<:Union{T,Nothing},SP<:AbstractSpace}
+struct Solver{T,ALG<:Union{AbstractODEAlgorithm,Nothing},DT<:Union{T,Nothing},SP<:AbstractSpace}
     tspan::Tuple{T,T}
     algorithm::ALG
     dt::DT
