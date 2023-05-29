@@ -6,7 +6,7 @@
 # Optional, allow specifying "tstops" which forces non-interpolation.
 
 
-import Base: to_indices, _maybetail, @_inline_meta, tail, getindex
+import Base: to_indices, @_inline_meta, tail, getindex
 
 abstract type AbstractSubsampler{D} end
 function coordinate_indices(lattice::LATTICE, 
@@ -66,10 +66,10 @@ struct StrideToEnd{STOP}
 end
 StrideToEnd(stride, start, stop::S=nothing) where S = StrideToEnd{S}(stride, start, stop)
 to_indices(A, inds, I::Tuple{StrideToEnd{Int}, Vararg{Any}})=
-(@_inline_meta; (I[1].start:I[1].stride:I[1].stop, to_indices(A, _maybetail(inds), tail(I))...))
+(@_inline_meta; (I[1].start:I[1].stride:I[1].stop, to_indices(A, inds[2:end], tail(I))...))
 to_indices(A, inds, I::Tuple{StrideToEnd{Nothing}, Vararg{Any}})=
-	(@_inline_meta; (I[1].start:I[1].stride:inds[1][end], to_indices(A, _maybetail(inds), tail(I))...))
-to_indices(A, inds, I::Tuple{NTuple{N,StrideToEnd}, Vararg{Any}}) where N = to_indices(A, inds, (I[1]..., _maybetail(I)...))
+	(@_inline_meta; (I[1].start:I[1].stride:inds[1][end], to_indices(A, inds[2:end], tail(I))...))
+to_indices(A, inds, I::Tuple{NTuple{N,StrideToEnd}, Vararg{Any}}) where N = to_indices(A, inds, (I[1]..., I[2:end]...))
 getindex(A::AbstractArray, S::StrideToEnd) = getindex(A, to_indices(A, (S,))...)
 
 function coordinate_indices(lattice::AbstractLattice{T}, subsampler::RightCutFromValue{D,T}) where {T,D}
