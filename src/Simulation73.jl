@@ -5,7 +5,7 @@ import SciMLBase: AbstractTimeseriesSolution, AbstractODEAlgorithm, ODEProblem, 
 import OrdinaryDiffEq: Euler
 import DiffEqBase: DESolution, solve, DECallback
 import DiffEqCallbacks: SavedValues
-import SciMLBase: CallbackSet
+using SciMLBase
 using Lazy
 using Parameters
 

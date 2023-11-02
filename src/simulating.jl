@@ -88,11 +88,21 @@ struct Simulation{
     global_reduction::GR
     solver_options
 end
-function Simulation(model::M; space::S, tspan, initial_value::IV=initial_value(model,space), 
-                    algorithm::ALG=nothing, dt::DT=nothing, save_idxs::SV_IDX=nothing, callback::CB=nothing, global_reduction::GR=identity, 
-        opts...) where {T,N,P,M<:AbstractModel{T,N,P}, S<:AbstractSpace{T,N},IV,ALG,DT,SV_IDX,CB,GR}
+function Simulation(
+        model::M; space::S, tspan, initial_value::IV=initial_value(model,space),
+        algorithm::ALG=nothing, dt::DT=nothing, save_idxs::SV_IDX=nothing,
+        callback::CB=nothing, global_reduction::GR=identity, 
+        opts...
+    ) where {T,N,P,
+        M<:AbstractModel{T,N,P}, S<:AbstractSpace{T,N},
+        IV,ALG,DT,SV_IDX,CB,GR
+    }
     save_idxs = parse_save_idxs(space, P, save_idxs)
-    return Simulation{T,M,S,IV,ALG,DT,typeof(save_idxs),CB,GR}(model, space, tspan, initial_value, algorithm, dt, save_idxs, callback, global_reduction, opts)
+    return Simulation{T,M,S,IV,ALG,DT,typeof(save_idxs),CB,GR}(
+        model, space, tspan, initial_value, 
+        algorithm, dt, save_idxs, callback, 
+        global_reduction, opts
+    )
 end
 function Simulation(model::Missing; kwargs...)
     return FailedSimulation{Missing}()
@@ -156,7 +166,7 @@ Return an ODEProblem of the `simulation.model` with time span specified by `simu
 
 function generate_problem(simulation::Simulation{T,<:AbstractODEModel}, p::NamedTuple, callback::DECallback) where {T}
     system_fn! = make_system_mutator(simulation)# simulation.model(simulation.space)
-    ode_fn = convert(ODEFunction{true}, system_fn!)
+    ode_fn = ODEFunction{true}(system_fn!)
     return ODEProblem(ode_fn, simulation.initial_value, simulation.tspan, p;callback=callback)
 end
 function generate_problem(simulation::Simulation{T,<:AbstractODEModel}, callback::Nothing, p::NamedTuple) where {T}
