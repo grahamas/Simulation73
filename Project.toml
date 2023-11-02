@@ -1,7 +1,7 @@
 name = "Simulation73"
 uuid = "310cc8c8-1ffe-11e9-399c-c5a008d6bdcc"
 authors = ["Graham Smith <grahamas@gmail.com>"]
-version = "3.1.1"
+version = "3.1.2"
 
 [deps]
 Dates = "ade2ca70-3891-5945-98fb-dc099432e06a"
