@@ -169,9 +169,9 @@ function generate_problem(simulation::Simulation{T,<:AbstractODEModel}, p::Named
     ode_fn = ODEFunction{true}(system_fn!)
     return ODEProblem(ode_fn, simulation.initial_value, simulation.tspan, p;callback=callback)
 end
-function generate_problem(simulation::Simulation{T,<:AbstractODEModel}, callback::Nothing, p::NamedTuple) where {T}
+function generate_problem(simulation::Simulation{T,<:AbstractODEModel}, p::NamedTuple, callback::Nothing) where {T}
     system_fn! = make_system_mutator(simulation)# simulation.model(simulation.space)
-    ode_fn = convert(ODEFunction{true}, system_fn!)
+    ode_fn = ODEFunction{true}(system_fn!)
     return ODEProblem(ode_fn, simulation.initial_value, simulation.tspan, p)
 end
 
@@ -226,7 +226,6 @@ function _solve(simulation::Simulation, alg, ensemble_alg; prob_func::Function, 
                     prob_func=prob_func,
                     reduction=reduction,
                     u_init=u_init)
-                    @show solver_options
     solve(ensemble_problem, alg, ensemble_alg; solver_options...)
 end
 

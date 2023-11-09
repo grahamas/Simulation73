@@ -51,6 +51,7 @@ end
         two_pops = population_repeat(single_pop, 2)
         @test nullstim_actions(two_pops, two_pops, 0.0) != 0
     end
+
     # TODO: need population interactions tests
     struct CrossMultiply{T} <: AbstractInteraction{T}
         mul::T
